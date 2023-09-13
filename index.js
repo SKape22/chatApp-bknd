@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const router = require('./src/api/v1/router')
+const router = require('./src/api/v1/user/routes')
 
 const app = express()
 require("dotenv").config();
@@ -9,7 +9,7 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/auth", router)
+app.use("/api/v1/user", router)
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -19,6 +19,13 @@ mongoose.connect(process.env.MONGO_URL, {
 }).catch((err) => {
     console.log(err.message);
 })
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server Started on Port ${process.env.PORT}`)
