@@ -1,9 +1,11 @@
-const { register, login } = require("./controller");
+const { register, login, setAvatar } = require("./controller");
 
-const router = require("express").Router();
+const routes = require("express").Router();
 
-router.post("/register", register);
+routes.post("/register", register);
 
-router.post("/login", login);
+routes.post("/login", login);
 
-module.exports = router
+routes.post("/setAvatar/:id", setAvatar);
+
+module.exports = routes
