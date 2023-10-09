@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 
 module.exports.register = async (req, res, next) => {
     try {
-        console.log(req.body);
         const { username, email, pass } = req.body;
 
         // const usernameCheck = await User.findOne({ username: username });
@@ -38,7 +37,7 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.login = async (req, res, next) => {
     try {
-        console.log(req.body);
+
         const { username, pass } = req.body;
 
         const user = await User.findOne({username});
